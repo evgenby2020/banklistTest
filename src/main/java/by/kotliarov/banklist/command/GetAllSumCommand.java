@@ -6,19 +6,16 @@ import by.kotliarov.banklist.dao.impl.DBDaoImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
-public class ReadeAllCommand implements Command {
+
+public class GetAllSumCommand implements Command {
     private DaoDB dbDao = DBDaoImpl.getInstance();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<Account> accountList = dbDao.readAll();
-        int sum = 0;
-        for (Account account : accountList) {
-            sum += account.getAccount();
-        }
+        int sum = dbDao.sumAccount();
         request.setAttribute("account", sum);
+        request.setAttribute("userid","");
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

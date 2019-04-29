@@ -4,7 +4,7 @@ public class User {
     private int id;
     private String name;
     private String sureName;
-
+    private Account account;
     public int getId() {
         return id;
     }
@@ -28,4 +28,13 @@ public class User {
     public void setSureName(String sureName) {
         this.sureName = sureName;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }
+

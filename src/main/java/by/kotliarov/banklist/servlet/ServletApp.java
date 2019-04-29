@@ -1,8 +1,8 @@
 package by.kotliarov.banklist.servlet;
 
 import by.kotliarov.banklist.command.Command;
-import by.kotliarov.banklist.command.ReadeAllCommand;
-import by.kotliarov.banklist.command.ReadeCommand;
+import by.kotliarov.banklist.command.GetAllSumCommand;
+import by.kotliarov.banklist.command.RichestUserCommand;
 
 
 import javax.servlet.ServletException;
@@ -28,14 +28,13 @@ public class ServletApp extends HttpServlet {
 
     @Override
     public void init()  {
-        commandMap.put(USER, new ReadeCommand());
-        commandMap.put(ACCOUNT, new ReadeAllCommand());
+        commandMap.put(USER, new RichestUserCommand());
+        commandMap.put(ACCOUNT, new GetAllSumCommand());
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Command command = commandMap.get(req.getParameter("flag"));
         try {
             command.execute(req, resp);

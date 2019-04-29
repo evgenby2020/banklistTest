@@ -7,13 +7,15 @@ import by.kotliarov.banklist.dao.DaoDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBDaoImpl implements DaoDB {
     private static DBDaoImpl dbDaoImpl = null;
+
     @Override
-    public  User reade(int id) {
+    public User read(int id) {
         ConnectorJdbc connection = new ConnectorJdbc();
         User user = new User();
         try {
@@ -33,7 +35,51 @@ public class DBDaoImpl implements DaoDB {
     }
 
     @Override
-    public List<Account> readAll() throws Exception {
+    public User getRichestUser() {
+        User user = new User();
+        Account account = new Account();
+        String sql = "SELECT * FROM banklist.user INNER JOIN banklist.account ON user.userid = account.userid WHERE account = (SELECT MAX(account.account) FROM banklist.account)";
+        ConnectorJdbc connection = new ConnectorJdbc();
+        try {
+            Statement statement = connection.getConnection().createStatement();
+            //statement.executeQuery(sql);
+
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                user.setId(resultSet.getInt(1));
+                user.setName(resultSet.getString(2));
+                user.setSureName(resultSet.getString(3));
+                account.setAccountid(resultSet.getInt(4));
+                account.setAccount(resultSet.getInt(5));
+                account.setUserid(resultSet.getInt(6));
+                user.setAccount(account);
+            }
+            connection.getConnection().close();
+        } catch (Exception e) {
+        }
+        return user;
+    }
+
+    @Override
+    public int sumAccount() {
+        String sql = "SELECT SUM(account) FROM banklist.account";
+        ConnectorJdbc connection = new ConnectorJdbc();
+        int sum = 0;
+        try {
+            Statement statement = connection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+
+                sum = resultSet.getInt(1);
+            }
+            connection.getConnection().close();
+        } catch (Exception e) {
+        }
+        return sum;
+    }
+
+    @Override
+    public List<Account> readAllAccounts() throws Exception {
 
         String sql = "SELECT * FROM banklist.account";
         List<Account> accounts = null;

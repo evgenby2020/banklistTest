@@ -11,15 +11,14 @@
 </head>
 <body>
 <form action="bank" method="post">
-    <%--<input type="text" name="id" value="${id}">--%>
-    <%--<input type="hidden" value="user">--%>
-    <%--<input type="submit"  value=".get">--%>
-    <div class="buttonFirst">
+     <div class="buttonFirst">
         <input class="buttonFirst" type="text" name="userid" value="${userid}">
         <button class="buttonFirst">.get</button>
         <input type="hidden" name="flag" value="user">
         <%--<input type="submit" value="Save"/>--%>
     </div>
+</form>
+    <form action="bank" method="post">
     <div class="buttonSecond">
         <input class="buttonSecond" type="text" name="account" value="${account}">
         <button class="buttonSecond">.get</button>

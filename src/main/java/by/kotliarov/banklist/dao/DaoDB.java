@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface DaoDB {
 
-    User reade(int id);
-    List<Account> readAll()throws Exception;
+    User read(int id);
+    List<Account> readAllAccounts()throws Exception;
+    int sumAccount();
+    User getRichestUser();
 }
