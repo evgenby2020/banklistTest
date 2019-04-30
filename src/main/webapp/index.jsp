@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Пользователь
-  Date: 24.04.2019
-  Time: 6:59
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,7 +8,6 @@
         <input class="buttonFirst" type="text" name="userid" value="${userid}">
         <button class="buttonFirst">.get</button>
         <input type="hidden" name="flag" value="user">
-        <%--<input type="submit" value="Save"/>--%>
     </div>
 </form>
     <form action="bank" method="post">
